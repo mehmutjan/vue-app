@@ -11,23 +11,32 @@ module.exports = {
         path: path.join(__dirname, './dist')
     },
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-
-                        less: ExtractTextPlugin.extract({
-                            use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
-                            fallback: 'vue-style-loader'
-                        }),
-
-                        css: ExtractTextPlugin.extract({
-                            use: ['css-loader', 'autoprefixer-loader'],
-                            fallback: 'vue-style-loader'
-                        })
+                use: [
+                    {
+                        loader: 'vue-loader',
+                        options: {
+                            loaders: {
+                                less: ExtractTextPlugin.extract({
+                                    use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
+                                    fallback: 'vue-style-loader'
+                                }),
+                                css: ExtractTextPlugin.extract({
+                                    use: ['css-loader', 'autoprefixer-loader', 'less-loader'],
+                                    fallback: 'vue-style-loader'
+                                })
+                            }
+                        }
+                    },
+                    {
+                        loader: 'iview-loader',
+                        options: {
+                            prefix: false
+                        }
                     }
-                }
+                ]
             },
             {
                 test: /iview\/.*?js$/,
@@ -45,15 +54,13 @@ module.exports = {
                     fallback: 'style-loader'
                 })
             },
-
             {
                 test: /\.less/,
                 use: ExtractTextPlugin.extract({
-                    use: ['autoprefixer-loader', 'less-loader'],
+                    use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
                     fallback: 'style-loader'
                 })
             },
-
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=1024'

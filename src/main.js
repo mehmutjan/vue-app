@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import iView from 'iview';
+import './theme/index.less';
 import VueRouter from 'vue-router';
 import Routers from './router';
 
 import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
+
 
 import VueI18n from 'vue-i18n';
 import Locales from './locale';
