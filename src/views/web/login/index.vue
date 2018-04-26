@@ -8,9 +8,21 @@
         left: 0;
         text-align: center;
         background-color: #f5f7f9;
+        font-weight: bold;
 
         .ivu-tabs {
-         background-color: #ffffff;
+            background-color: #ffffff;
+            border: 1px solid #cdcdcd;
+        }
+        .ivu-tabs-nav {
+            width: 100%;
+            background-color: #f5f7f9; 
+            .ivu-tabs-tab {
+                width: 50%;
+            }
+        }
+        .ivu-tabs-tab-active {
+            background-color: #ffffff;
         }
     }
 
@@ -18,7 +30,7 @@
 <template>
     <div class="index">
         <Row type="flex" justify="center" align="middle">
-            <Col span="6">
+            <Col span="7">
                 <Tabs>
                     <TabPane label="登陆">
                         <login></login>

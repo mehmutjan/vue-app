@@ -1,31 +1,35 @@
-<style scoped>
+<style lang='less'>
     .layout {
         border: 1px solid #d7dde4;
         background: #f5f7f9;
         position: relative;
         border-radius: 4px;
         overflow: hidden;
-    }
+        font-weight: bold;
 
-    .layout-logo {
-        width: 100px;
-        height: 30px;
-        background: #5b6270;
-        border-radius: 3px;
-        float: left;
-        position: relative;
-        top: 15px;
-        left: 20px;
-    }
+        .layout-logo {
+            width: 100px;
+            height: 30px;
+            background: #5b6270;
+            border-radius: 3px;
+            float: left;
+            position: relative;
+            top: 15px;
+            left: 20px;
+        }
 
-    .layout-nav {
-        width: 420px;
-        margin: 0 auto;
-        margin-right: 20px;
-    }
+        .layout-nav {
+            width: 85%;
+            margin: 0 auto;
+            margin-right: 20px;
+        }
 
-    .layout-footer-center {
-        text-align: center;
+        .layout-footer-center {
+            text-align: center;
+        }
+        .dropdown-menu {
+
+        }
     }
 </style>
 <template>
@@ -52,7 +56,25 @@
                             Item 4
                         </MenuItem>
                     </div>
+                    <div class="dropdown-menu">
+                        <div class="avatar-logo"></div>
+                        <div class="avatar-nav">
+                            <Dropdown style="margin-left: 20px">
+                                <Button type="primary">
+                                    管理
+                                    <Icon type="arrow-down-b"></Icon>
+                                </Button>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem>个人设置</DropdownItem>
+                                    <DropdownItem divided>
+                                        <a @click="handleSubmit">退出</a>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                    </div>
                 </Menu>
+
             </Header>
             <Content :style="{padding: '0 50px'}">
                 <Breadcrumb :style="{margin: '20px 0'}">
@@ -71,5 +93,13 @@
     </div>
 </template>
 <script>
-    export default {};
+    import authClient from '../libs/authClient';
+
+    export default {
+        methods: {
+            handleSubmit() {
+                authClient('AUTH_LOGOUT');
+            }
+        }
+    };
 </script>

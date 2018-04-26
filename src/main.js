@@ -1,18 +1,19 @@
 import Vue from 'vue';
 import iView from 'iview';
-import './theme/index.less';
 import VueRouter from 'vue-router';
 import Routers from './router';
 
 import Util from './libs/util';
 import App from './app.vue';
-import 'iview/dist/styles/iview.css';
-
+//覆盖全局样式
+import './theme/index.less';
+// import 'iview/dist/styles/iview.css';
 
 import VueI18n from 'vue-i18n';
 import Locales from './locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
+import authClient from './libs/authClient';
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,7 @@ const RouterConfig = {
 const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
+    authClient('AUTH_CHECK');
     iView.LoadingBar.start();
     Util.title(to.meta.title);
     next();

@@ -1,8 +1,7 @@
 const login_uri = 'http://api.cms.com/api/login_check';
 
-export default (type, params) => {
+export default (type, params = {}) => {
     if (type === 'AUTH_REGISTER') {
-
         localStorage.setItem('token', params.data.token); // The JWT token is stored in the browser's local storage
         window.location.replace('/');
     } else if (type === 'AUTH_LOGIN') {
@@ -26,6 +25,7 @@ export default (type, params) => {
             });
     } else if (type === 'AUTH_LOGOUT') {
         localStorage.removeItem('token');
+        window.location.replace('/login');
 
     } else if (type === 'AUTH_ERROR') {
 
@@ -35,8 +35,9 @@ export default (type, params) => {
             return Promise.reject();
         }
     } else if (type === 'AUTH_CHECK') {
-
-        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
+        if (null === localStorage.getItem('token') && '/login' !== window.location.pathname) {
+            window.location.replace('/login');
+        }
     } else {
 
         return Promise.resolve();

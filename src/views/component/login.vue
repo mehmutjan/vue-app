@@ -31,7 +31,6 @@
                     ],
                     password: [
                         {required: true, message: 'password cannot be empty', trigger: 'blur'},
-                        {type: 'password', message: 'Incorrect password', trigger: 'blur'}
                     ],
                 },
             };
@@ -42,9 +41,7 @@
                     if (!valid) {
                         this.$Message.error('Fail!');
                     } else {
-                        webApi.login(this.from).then(data => {
-                            authClient('AUTH_LOGIN', data);
-                        });
+                        authClient('AUTH_LOGIN', this.form);
                         this.$Message.success('Success!');
                     }
                 });
